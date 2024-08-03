@@ -10,7 +10,6 @@ import android.os.Build
 import android.webkit.WebView
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jcifs.context.SingletonContext
-import me.zhanghai.android.files.BuildConfig
 import me.zhanghai.android.files.coil.initializeCoil
 import me.zhanghai.android.files.filejob.fileJobNotificationTemplate
 import me.zhanghai.android.files.ftpserver.ftpServerServiceNotificationTemplate
@@ -38,9 +37,7 @@ val appInitializers = listOf(
 )
 
 private fun initializeCrashlytics() {
-//#ifdef NONFREE
-    me.zhanghai.android.files.nonfree.CrashlyticsInitializer.initialize()
-//#endif
+
 }
 
 private fun disableHiddenApiChecks() {
@@ -52,9 +49,6 @@ private fun initializeThreeTen() {
 }
 
 private fun initializeWebViewDebugging() {
-    if (BuildConfig.DEBUG) {
-        WebView.setWebContentsDebuggingEnabled(true)
-    }
 }
 
 private fun initializeFileSystemProviders() {

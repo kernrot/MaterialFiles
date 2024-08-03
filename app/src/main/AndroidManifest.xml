@@ -33,7 +33,7 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <!-- Shizuku requires API 23. -->
-    <uses-sdk tools:overrideLibrary="rikka.shizuku.aidl,rikka.shizuku.api,rikka.shizuku.shared" />
+    <uses-sdk tools:overrideLibrary="rikka.shizuku.aidl,rikka.shizuku.api,rikka.shizuku.shared,androidx.car.app" />
 
     <!--
       ~ Samsung DeX requires explicitly setting android:resizeableActivity="true" for the app to be
@@ -396,4 +396,25 @@
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
     </application>
+
+    <uses-feature
+        android:name="android.hardware.type.automotive"
+        android:required="true" />
+    <uses-feature
+        android:name="android.software.car.templates_host"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.landscape"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
 </manifest>

@@ -9,33 +9,18 @@ apply plugin: 'kotlin-parcelize'
 
 apply from: '../signing.gradle'
 
-//#ifdef NONFREE
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.google.gms:google-services:4.4.2'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
-    }
-}
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-//#endif
-
 android {
     namespace 'me.zhanghai.android.files'
     buildToolsVersion = '34.0.0'
     compileSdk 34
     ndkVersion '26.3.11579264'
     defaultConfig {
-        applicationId 'me.zhanghai.android.files'
+        applicationId 'de.kernrot.android.files'
         minSdk 21
         // Not supporting notification runtime permission yet.
         //noinspection OldTargetApi
         targetSdk 34
-        versionCode 37
+        versionCode 40
         versionName '1.7.2'
         resValue 'string', 'app_version', versionName + ' (' + versionCode + ')'
         buildConfigField 'String', 'FILE_PROVIDIER_AUTHORITY', 'APPLICATION_ID + ".file_provider"'
@@ -46,6 +31,8 @@ android {
                 arguments '-DANDROID_STL=none'
             }
         }
+        applicationIdSuffix 'aaos.beta'
+        versionNameSuffix 'aaos-beta'
     }
     buildFeatures {
         aidl true
@@ -78,11 +65,6 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-//#ifdef NONFREE
-            firebaseCrashlytics {
-                nativeSymbolUploadEnabled true
-            }
-//#endif
         }
     }
     packagingOptions {
@@ -210,9 +192,4 @@ dependencies {
     // Also a dependency of jCIFS-NG.
     implementation 'org.slf4j:slf4j-android:1.7.36'
 
-//#ifdef NONFREE
-    implementation platform('com.google.firebase:firebase-bom:33.1.1')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics-ndk'
-//#endif
 }
